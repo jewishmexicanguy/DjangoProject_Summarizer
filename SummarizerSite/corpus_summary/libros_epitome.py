@@ -99,7 +99,10 @@ def find_xml_links(xml_map):
             )
         )
     return to_summarize
-
+    print('request object intro spection:')
+    methodList = [method for method in dir(request) if callable(getattr(request, method))]
+    for i in methodList:
+        print(i)
 
 def summarize_from_rss_feeds(urls):
     """
@@ -131,9 +134,12 @@ def summarize_from_raw_text(corpus, title, num_pages = 2):
     f = open('rss_sumaries', 'a')
     f.write('--------------------Summary of: ' + title + '----------------------\r\n')
     f.write('number of pages: ' + str(num_pages) + '\r\n\r\n')
+    summary = 'number of pages: ' + str(num_pages) + '\r\n\r\n'
     for s in fs.summarize(corpus, num_pages):
         f.write('* ' + s + '\r\n\r\n')
+        summary += '/r/n* ' + s
     f.close()
+    return summary
 
 xml_feeds = [
     'http://feeds.bbci.co.uk/news/rss.xml',

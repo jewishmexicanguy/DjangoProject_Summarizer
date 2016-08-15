@@ -1,0 +1,23 @@
+{% extends "corpus_summary/base.html" %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1>Why hello there, my it looks like you have traveled very far.</h1>
+        <hr />
+        <p>yay!</p>
+    </div>
+</div>
+<div class="container">
+    <form method="POST" id="post-form">
+        {% csrf_token %}
+        <div class="fieldWrapper" id="the_post">
+            {{ form.text }}
+        </div>
+        <div id="results">
+        </div>
+        <input type="submit" value="Post" class="tiny button"
+    </form>
+</div>
+<script src="/static/scripts/main.js">
+</script>
+{% endblock %}

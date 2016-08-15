@@ -1,9 +1,15 @@
 from django import forms
 
-class PostDocument(forms.ModelForm):
+# deffining this class to inherit from forms.ModelForm 
+#class PostDocument(forms.ModelForm):
+class PostDocument(forms.Form):
+    """
+    Since this form is inheriting from forms.Form we set it's named residents here'
+    """
     class Meta:
-        model = ''
+        #model = ''
         fields = ['text']
+        text = forms.CharField(max_length = 5000)
         widgets = {
             'text': forms.TextInput(
                 attrs = {
