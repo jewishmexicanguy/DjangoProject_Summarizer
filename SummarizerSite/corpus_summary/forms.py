@@ -9,7 +9,7 @@ class PostDocument(forms.Form):
     class Meta:
         #model = ''
         fields = ['text']
-        text = forms.CharField(max_length = 5000)
+        #text = forms.CharField(max_length = 5000)
         widgets = {
             'text': forms.TextInput(
                 attrs = {

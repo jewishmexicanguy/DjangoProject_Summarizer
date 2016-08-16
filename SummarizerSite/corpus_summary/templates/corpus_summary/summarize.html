@@ -2,21 +2,33 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1>Why hello there, my it looks like you have traveled very far.</h1>
+        <h1>Auto Summary</h1>
         <hr />
-        <p>yay!</p>
+        <p>Below is a form that computes the paragraph that contains the most important ideas of a given peice of text.</p>
     </div>
 </div>
 <div class="container">
     <form method="POST" id="post-form">
         {% csrf_token %}
-        <div class="fieldWrapper" id="the_post">
-            {{ form.text }}
+        <div class="row">
+            <div class="col-md-6">
+                <span class="label label-info">Title</span>
+                <input type="text" id="text-title" placeholder="place title here">
+            </div>
+            <div class="col-md-6">
+                <span class="label label-info">Document Text</span>
+                <input type="text" id="text-to-submit" placeholder="place text here">
+            </div>
         </div>
-        <div id="results">
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <input type="submit" value="Post" class="tiny button">
+            </div>
         </div>
-        <input type="submit" value="Post" class="tiny button"
     </form>
+    <div id="results">
+    </div>
 </div>
 <script src="/static/scripts/main.js">
 </script>

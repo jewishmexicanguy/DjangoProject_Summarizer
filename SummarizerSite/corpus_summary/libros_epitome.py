@@ -131,14 +131,9 @@ def summarize_from_rss_feeds(urls):
 
 def summarize_from_raw_text(corpus, title, num_pages = 2):
     fs = FrequencySummarizer()
-    f = open('rss_sumaries', 'a')
-    f.write('--------------------Summary of: ' + title + '----------------------\r\n')
-    f.write('number of pages: ' + str(num_pages) + '\r\n\r\n')
     summary = 'number of pages: ' + str(num_pages) + '\r\n\r\n'
     for s in fs.summarize(corpus, num_pages):
-        f.write('* ' + s + '\r\n\r\n')
         summary += '/r/n* ' + s
-    f.close()
     return summary
 
 xml_feeds = [

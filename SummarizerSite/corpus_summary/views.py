@@ -13,10 +13,11 @@ def summarize(request):
 
 def summarize_POST(request):
     if request.method == 'POST':
-        post_text = request.POST.get('the_post')
+        post_title = request.POST.get('text_title')
+        post_text = request.POST.get('text')
         response_data = {}
         response_data['result'] = 'Callback POST successful'
-        response_data['summary'] = summarize_from_raw_text(post_text, 'this title')
+        response_data['summary'] = summarize_from_raw_text(post_text, post_title)
         return HttpResponse(
             json.dumps(response_data),
             content_type = "application/json"

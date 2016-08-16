@@ -6,7 +6,7 @@ from libros_epitome import summarize_from_raw_text, summarize_from_rss_feeds
 import PyPDF2
 import glob
 
-pdf_list = glob.glob('/home/issacs/Desktop/Corpus_Analyzer/documents/*.pdf')
+pdf_list = glob.glob('/home/issacs/Desktop/GitProjects/DjangoProject_Summarizer/SummarizerSite/corpus_summary/documents/*.pdf')
 print(pdf_list)
 for i in pdf_list:
     pdf_file_object = open(i, 'rb')
@@ -14,10 +14,12 @@ for i in pdf_list:
     text = ''
     for j in range(pdf_reader.numPages):
         text += pdf_reader.getPage(j).extractText()
-    summarize_from_raw_text(
-        text,
-        i.split('/')[len(i.split('/')) - 1], 
-        pdf_reader.numPages
+    print(
+        summarize_from_raw_text(
+            text,
+            i.split('/')[len(i.split('/')) - 1], 
+            pdf_reader.numPages
+        )
     )
 
 #summarize_from_raw_text(raw_text, 'FREE PRIVATE CITIES: THE FUTURE OF GOVERNANCE IS PRIVATE')

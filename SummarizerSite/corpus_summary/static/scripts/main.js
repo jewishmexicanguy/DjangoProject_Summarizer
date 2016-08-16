@@ -2,28 +2,46 @@ $(function() {
     // Submit post on submit
     $('#post-form').on('submit', function(event){
         event.preventDefault();
-        console.log("form submitted");
         create_post();
     });
 
+    // AJAX for posting
     function create_post() {
-        console.log("create_post reached.");
         $.ajax({
-            url : "create_post/",
-            type : "POST",
-            data : { the_post : $('#post-text').val()},
-            success : function(json) {
-                $('#post-text').val('');
-                $('#results').innerHTML = '<p>' + json.summary + '</p>';
+            url : "/summary/create_post/", // the endpoint
+            type : "POST", // http method
+            data : { 
+                text_title : $('#text-title').val(),
+                text : $('#text-to-submit').val() 
+            }, // data sent with the post request
+            // handle a successful response
+            success : function(json) 
+            {
+                // remove the value from the inputs
+                $('#text-to-submit').val('');
+                $('#text-title').val('');
+
+                // update the results div
+                var paragraphs = json.summary.split('/r/n');
+                var summary_elements = '<b>Text Summary</b><br />';
+                for (var i = 0; i < paragraphs.length; i++)
+                {
+                    summary_elements += '<p>' + paragraphs[i] + '</p><br />';
+                }
+                $('#results').html(summary_elements);
             },
-            error : function(xhr, errmsg, err){
-                $('results').innerHTML = '<p>something went wrong</p>'; 
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) 
+            {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
         });
     };
 
+
     // This function gets cookie with a given name
-    function getCookie(name) {
+    function getCookie(name) 
+    {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {
             var cookies = document.cookie.split(';');
@@ -44,11 +62,13 @@ $(function() {
     The functions below will create a header with csrftoken
     */
 
-    function csrfSafeMethod(method) {
+    function csrfSafeMethod(method) 
+    {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
-    function sameOrigin(url) {
+    function sameOrigin(url) 
+    {
         // test that a given url is a same-origin URL
         // url could be relative or scheme relative or absolute
         var host = document.location.host; // host + port
@@ -72,4 +92,5 @@ $(function() {
             }
         }
     });
+
 });
